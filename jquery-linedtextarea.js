@@ -4,6 +4,12 @@
  *
  * Copyright (c) 2010 Alan Williamson
  * 
+ * This version contains improvement for working with a 
+ * large number of lines.
+ *
+ * Available at
+ * 		https://github.com/cotenoni/jquery-linedtextarea
+ * 
  * Version: 
  *    $Id: jquery-linedtextarea.js 464 2010-01-08 10:36:33Z alan $
  *
@@ -22,6 +28,7 @@
  *   });
  *
  * History:
+ * 	 - 2010.02.20: Fixed performance problem with high numbers of line
  *   - 2010.01.08: Fixed a Google Chrome layout problem
  *   - 2010.01.07: Refactored code for speed/readability; Fixed horizontal sizing
  *   - 2010.01.06: Initial Release
