@@ -98,11 +98,16 @@
 			textarea.width( textareaNewWidth );
 			linedWrapDiv.width( linedWrapDivNewWidth );
 			
-			var tid = null;
 			/* React to the scroll event */
-			textarea.scroll( function(tn, e){
+			var tid = null;
+			textarea.scroll( function(tn){
 				if (tid === null) {
 					var that = this;
+					
+					// We use a timeout as to avoid appending/redrawing
+					// the div on every scroll event. This does add some latency
+					// before the right line number is displayed, but makes possible
+					// scrolling with a very high number of lines
 					tid = setTimeout( function() {
 						codeLinesDiv.empty();
 						
@@ -111,7 +116,7 @@
 						var scrollTop 			= domTextArea.scrollTop;
 						var firstLine 			= Math.floor((scrollTop / LINEHEIGHT) + 1);
 						var remainingScroll = (scrollTop / LINEHEIGHT) % 1;
-						
+
 						fillOutLines( codeLinesDiv, linesDiv.height(), firstLine );
 						codeLinesDiv.css( {'margin-top': (-1*(remainingScroll*LINEHEIGHT)) + "px"} );
 						tid=null;
