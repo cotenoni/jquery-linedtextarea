@@ -97,15 +97,26 @@
 			textarea.width( textareaNewWidth );
 			linedWrapDiv.width( linedWrapDivNewWidth );
 			
-
-			
+			var tid = null;
 			/* React to the scroll event */
-			textarea.scroll( function(tn){
-				var domTextArea		= $(this)[0];
-				var scrollTop 		= domTextArea.scrollTop;
-				var clientHeight 	= domTextArea.clientHeight;
-				codeLinesDiv.css( {'margin-top': (-1*scrollTop) + "px"} );
-				lineNo = fillOutLines( codeLinesDiv, scrollTop + clientHeight, lineNo );
+			textarea.scroll( function(tn, e){
+				if (tid === null) {
+					var that = this;
+					tid = setTimeout( function() {
+						codeLinesDiv.empty();
+						// Calculare the line numbers to display
+						var domTextArea		= $(that)[0];
+						var scrollTop 		= domTextArea.scrollTop;
+
+						var firstLine = Math.floor((scrollTop / 15) + 1);
+						fillOutLines( codeLinesDiv, linesDiv.height(), firstLine );
+
+						var remainingScroll = (scrollTop / 15) % 1;
+
+						codeLinesDiv.css( {'margin-top': (-1*(remainingScroll*15)) + "px"} );
+						tid=null;
+					}, 150);
+				}
 			});
 
 
