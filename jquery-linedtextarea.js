@@ -33,6 +33,7 @@
 		
 		// Get the Options
 		var opts = $.extend({}, $.fn.linedtextarea.defaults, options);
+		var LINEHEIGHT = 15;
 		
 		
 		/*
@@ -108,12 +109,11 @@
 						var domTextArea		= $(that)[0];
 						var scrollTop 		= domTextArea.scrollTop;
 
-						var firstLine = Math.floor((scrollTop / 15) + 1);
+						var firstLine = Math.floor((scrollTop / LINEHEIGHT) + 1);
 						fillOutLines( codeLinesDiv, linesDiv.height(), firstLine );
 
-						var remainingScroll = (scrollTop / 15) % 1;
-
-						codeLinesDiv.css( {'margin-top': (-1*(remainingScroll*15)) + "px"} );
+						var remainingScroll = (scrollTop / LINEHEIGHT) % 1;
+						codeLinesDiv.css( {'margin-top': (-1*(remainingScroll*LINEHEIGHT)) + "px"} );
 						tid=null;
 					}, 150);
 				}
