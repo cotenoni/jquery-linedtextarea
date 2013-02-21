@@ -105,14 +105,14 @@
 					var that = this;
 					tid = setTimeout( function() {
 						codeLinesDiv.empty();
+						
 						// Calculare the line numbers to display
-						var domTextArea		= $(that)[0];
-						var scrollTop 		= domTextArea.scrollTop;
-
-						var firstLine = Math.floor((scrollTop / LINEHEIGHT) + 1);
-						fillOutLines( codeLinesDiv, linesDiv.height(), firstLine );
-
+						var domTextArea			= $(that)[0];
+						var scrollTop 			= domTextArea.scrollTop;
+						var firstLine 			= Math.floor((scrollTop / LINEHEIGHT) + 1);
 						var remainingScroll = (scrollTop / LINEHEIGHT) % 1;
+						
+						fillOutLines( codeLinesDiv, linesDiv.height(), firstLine );
 						codeLinesDiv.css( {'margin-top': (-1*(remainingScroll*LINEHEIGHT)) + "px"} );
 						tid=null;
 					}, 150);
